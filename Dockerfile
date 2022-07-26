@@ -13,6 +13,7 @@ RUN apt-get -qq update && \
         clang \
         cmake \
         curl \
+        doxygen \
         gettext \
         g++ \
         git \
@@ -21,7 +22,6 @@ RUN apt-get -qq update && \
         make \
         ninja-build \
         pkg-config \
-        doxygen \
         unzip
 
 
@@ -30,18 +30,20 @@ RUN git clone --depth 1 --branch stable https://github.com/neovim/neovim.git "${
 RUN cd ${NVIM_HOME} && \
     make CMAKE_BUILD_TYPE=Release && \
     make install
-RUN cd /home && rm -rf "${NVIM_HOME}"
 
-FROM scratch
-
-ARG NVIM_HOME
-
-COPY --from=build_nvim "${NVIM_HOME}" "/"
-RUN mkdir -p "${NVIM_CONFIG}" && touch "${NVIM_CONFIG}/init.lua"
-
+# Clean up
 RUN apt-get autoremove && \
     apt-get clean
+RUN rm -rf "${NVIM_HOME}"
 
+ENTRYPOINT ["/usr/local/bin/nvim"]
+
+# TODO: bare minimum neovim stuff saved here
+# FROM scratch
+#
+# ARG NVIM_HOME
+#
+# COPY --from=build_nvim "${NVIM_HOME}" "/"
+# RUN mkdir -p "${NVIM_CONFIG}" && touch "${NVIM_CONFIG}/init.lua"
 # ~/.config/nvim/
 # /usr/local/share/nvim/runtime/
-
