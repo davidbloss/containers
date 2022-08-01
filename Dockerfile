@@ -25,14 +25,16 @@ RUN cd ${NVIM_HOME} && \
 FROM alpine:3.15.5 AS neovim_runtime
 
 ARG NVIM_BIN="/usr/local/bin/nvim"
-# ARG NVIM_CONFIG="~/.config/nvim"
+ARG NVIM_CONFIG="~/.config/nvim"
 ARG NVIM_RUNTIME="/usr/local/share/nvim/runtime"
+
+WORKDIR /home
 
 RUN apk add gcc
 COPY --from=build_neovim ${NVIM_BIN} ${NVIM_BIN}
 COPY --from=build_neovim ${NVIM_RUNTIME} ${NVIM_RUNTIME}
 
-# RUN mkdir -p ${NVIM_CONFIG} && touch ${NVIM_CONFIG}/init.lua
+RUN mkdir -p ${NVIM_CONFIG} && touch ${NVIM_CONFIG}/init.lua
 
 ENTRYPOINT ["nvim"]
 
