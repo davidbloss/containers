@@ -1,4 +1,4 @@
-ARG NVIM_CONFIG="~/.config/nvim"
+ARG NVIM_CONFIG="${HOME}/.config/nvim"
 
 FROM alpine:3.15.5 as neovim_build
 
