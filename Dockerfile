@@ -46,7 +46,7 @@ WORKDIR /home
 RUN apk add --no-cache gcc
 COPY --from=neovim_build ${NVIM_BIN} ${NVIM_BIN}
 COPY --from=neovim_build ${NVIM_RUNTIME} ${NVIM_RUNTIME}
-COPY --link --from=neovim_config ${NVIM_CONFIG} ${NVIM_CONFIG}
+COPY --from=neovim_config ${NVIM_CONFIG} ${NVIM_CONFIG}
 
 ENTRYPOINT ["nvim"]
 
