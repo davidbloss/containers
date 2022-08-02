@@ -1,8 +1,9 @@
 FROM alpine:3.15.5 as build_neovim
 
+ARG NVIM_CONFIG="~/.config/nvim"
 ARG NVIM_HOME="/home/nvim"
 
-RUN apk add \
+RUN apk add --no-cache \
     autoconf \
     automake \
     build-base \
@@ -22,19 +23,29 @@ RUN cd ${NVIM_HOME} && \
     make CMAKE_BUILD_TYPE=Release && \
     make install
 
+# Base config - no plugins yet...
+FROM alpine:3.15.5 AS neovim_config
+
+ARG NVIM_CONFIG
+
+RUN apk add --no-cache git
+RUN mkdir -p ${NVIM_CONFIG} && \
+    git clone --depth 1 --branch base-no-plugins \
+    https://github.com/davidbloss/nvim-basic-ide.git ${NVIM_CONFIG}
+
+# Final product - all build, config, etc. brought in from prior image
 FROM alpine:3.15.5 AS neovim_runtime
 
 ARG NVIM_BIN="/usr/local/bin/nvim"
-ARG NVIM_CONFIG="~/.config/nvim"
+ARG NVIM_CONFIG
 ARG NVIM_RUNTIME="/usr/local/share/nvim/runtime"
 
 WORKDIR /home
 
-RUN apk add gcc
+RUN apk add --no-cache gcc
 COPY --from=build_neovim ${NVIM_BIN} ${NVIM_BIN}
 COPY --from=build_neovim ${NVIM_RUNTIME} ${NVIM_RUNTIME}
-
-RUN mkdir -p ${NVIM_CONFIG} && touch ${NVIM_CONFIG}/init.lua
+COPY --link --from=build_config ${NVIM_CONFIG} ${NVIM_CONFIG}
 
 ENTRYPOINT ["nvim"]
 
