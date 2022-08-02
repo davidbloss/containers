@@ -1,6 +1,7 @@
+ARG NVIM_CONFIG="~/.config/nvim"
+
 FROM alpine:3.15.5 as build_neovim
 
-ARG NVIM_CONFIG="~/.config/nvim"
 ARG NVIM_HOME="/home/nvim"
 
 RUN apk add --no-cache \
