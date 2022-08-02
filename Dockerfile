@@ -1,6 +1,6 @@
 ARG NVIM_CONFIG="~/.config/nvim"
 
-FROM alpine:3.15.5 as build_neovim
+FROM alpine:3.15.5 as neovim_build
 
 ARG NVIM_HOME="/home/nvim"
 
@@ -44,9 +44,9 @@ ARG NVIM_RUNTIME="/usr/local/share/nvim/runtime"
 WORKDIR /home
 
 RUN apk add --no-cache gcc
-COPY --from=build_neovim ${NVIM_BIN} ${NVIM_BIN}
-COPY --from=build_neovim ${NVIM_RUNTIME} ${NVIM_RUNTIME}
-COPY --link --from=build_config ${NVIM_CONFIG} ${NVIM_CONFIG}
+COPY --from=neovim_build ${NVIM_BIN} ${NVIM_BIN}
+COPY --from=neovim_build ${NVIM_RUNTIME} ${NVIM_RUNTIME}
+COPY --link --from=neovim_config ${NVIM_CONFIG} ${NVIM_CONFIG}
 
 ENTRYPOINT ["nvim"]
 
