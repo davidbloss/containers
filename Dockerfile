@@ -32,7 +32,7 @@ ARG NVIM_BASIC_IDE_BRANCH=base-no-plugins
 RUN git clone --depth 1 https://github.com/wbthomason/packer.nvim \
     ${HOME}/.local/share/nvim/site/pack/packer/start/packer.nvim && \
     git clone --depth 1 --branch ${NVIM_BASIC_IDE_BRANCH} \
-    https://github.com/davidbloss/nvim-basic-ide.git ${HOME}/.config/nvim && \
+    https://github.com/davidbloss/nvim-basic-ide.git ${HOME}/.config/nvim
 
 # Final product - all build, config, etc. brought in from prior image
 FROM neovim_config_base AS neovim_base
