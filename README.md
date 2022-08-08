@@ -26,16 +26,16 @@ parser installed via nvim-treesitter
 
 ### Python IDE
 Features and programs to include:
-- Python dev
-  - Python 3 with linters, formatters, etc.
-  - [jedi-language-server](https://github.com/pappasam/jedi-language-server)
+- Python 3 with linters, formatters, etc.
+- [jedi-language-server](https://github.com/pappasam/jedi-language-server)
 parser installed via nvim-treesitter
 
 ### C/C++ IDE
 Features and programs to include:
-- C/C++ dev
-  - llvm/clang stuff?
-  - nvim-treesitter installed parser
+- LLVM/clang stuff
+- [clangd](https://clangd.llvm.org) parser installed via nvim-treesitter
+- [cmake](https://github.com/regen100/cmake-language-server)
+parser installed via nvim-treesitter
 
 ### Misc
 - yaml (Gitlab) support?
