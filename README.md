@@ -39,3 +39,6 @@ parser installed via nvim-treesitter
 
 ### Misc
 - yaml (Gitlab) support?
+
+### Full Featured IDE
+Combination of above IDEs.
