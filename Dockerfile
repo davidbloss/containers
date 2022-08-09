@@ -23,16 +23,13 @@ RUN apk add --no-cache \
 RUN git clone --depth 1 --branch stable https://github.com/neovim/neovim.git .
 RUN make -j CMAKE_BUILD_TYPE=Release && make -j install
 
-# Base config - includes very basic configs and packer for plugin management
+# Base config. Contains neovim plugins for git, code navigation, and style.
 FROM git_layer AS neovim_config_base
-
-# TODO: only pull base branch. Move more complex configs to extending image
-ARG NVIM_BASIC_IDE_BRANCH=base-no-plugins
 
 RUN git clone --depth 1 https://github.com/wbthomason/packer.nvim \
     ${HOME}/.local/share/nvim/site/pack/packer/start/packer.nvim && \
-    git clone --depth 1 --branch ${NVIM_BASIC_IDE_BRANCH} \
-    https://github.com/davidbloss/nvim-basic-ide.git ${HOME}/.config/nvim
+    git clone --depth 1 --branch base-ide \
+    https://github.com/davidbloss/neovim-ide.git ${HOME}/.config/nvim
 
 # Final product - all build, config, etc. brought in from prior image
 FROM neovim_config_base AS neovim_base

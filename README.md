@@ -11,9 +11,8 @@ Collection of "batteries included" Neovim configurations.
 Standalone container that more feature full containers may be built on.
 - Base (foundation that all others can build on)
   - FROM alpine (musl libc)
-  - configured nvim w/ pure lua plugins
-    - sourced from my repo
-    - git included
+  - Neovim [base-IDE](https://github.com/davidbloss/neovim-ide/tree/base-ide)
+    configured with git and generic plugins.
 - Base2: glibc based container (not musl libc)
   - Necessary?
 
@@ -29,6 +28,8 @@ Features and programs to include:
 - Python 3 with linters, formatters, etc.
 - [jedi-language-server](https://github.com/pappasam/jedi-language-server)
 parser installed via nvim-treesitter
+- Neovim [python-IDE](https://github.com/davidbloss/neovim-ide/tree/python-ide)
+  configured with Python LSP goodies. **WIP: not functional**
 
 ### C/C++ IDE
 Features and programs to include:
