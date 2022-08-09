@@ -2,6 +2,8 @@
 FROM alpine:3.15.5 as git_layer
 
 RUN apk add git
+ENV XDG_CONFIG_HOME="${XDG_CONFIG_HOME:-/home/.config}"
+ENV XDG_DATA_HOME="${XDG_DATA_HOME:-/home/.local/share}"
 
 FROM git_layer as neovim_build
 
@@ -27,9 +29,9 @@ RUN make -j CMAKE_BUILD_TYPE=Release && make -j install
 FROM git_layer AS neovim_config_base
 
 RUN git clone --depth 1 https://github.com/wbthomason/packer.nvim \
-    ${HOME}/.local/share/nvim/site/pack/packer/start/packer.nvim && \
+    ${XDG_DATA_HOME}/nvim/site/pack/packer/start/packer.nvim && \
     git clone --depth 1 --branch base-ide \
-    https://github.com/davidbloss/neovim-ide.git ${HOME}/.config/nvim
+    https://github.com/davidbloss/neovim-ide.git ${XDG_CONFIG_HOME}/nvim
 
 # Final product - all build, config, etc. brought in from prior image
 FROM neovim_config_base AS neovim_base
