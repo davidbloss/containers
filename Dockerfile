@@ -34,6 +34,8 @@ RUN git clone --depth 1 https://github.com/wbthomason/packer.nvim \
 # Final product - all build, config, etc. brought in from prior image
 FROM neovim_config_base AS neovim_base
 
+WORKDIR /home
+
 RUN apk add g++ ripgrep
 COPY --from=neovim_build /usr/local/bin/nvim /usr/local/bin/nvim
 COPY --from=neovim_build /usr/local/share/nvim/runtime /usr/local/share/nvim/runtime
