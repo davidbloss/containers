@@ -2,8 +2,8 @@
 FROM alpine:3.15.5 as git_layer
 
 RUN apk add git
-ENV XDG_CONFIG_HOME="${XDG_CONFIG_HOME:-/home/.config}"
-ENV XDG_DATA_HOME="${XDG_DATA_HOME:-/home/.local/share}"
+ENV XDG_CONFIG_HOME="${XDG_CONFIG_HOME:-/home/.config}" \
+    XDG_DATA_HOME="${XDG_DATA_HOME:-/home/.local/share}"
 
 FROM git_layer as neovim_build
 
