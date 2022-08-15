@@ -28,7 +28,7 @@ RUN make -j CMAKE_BUILD_TYPE=Release && make -j install
 # Base config. Contains neovim plugins for git, code navigation, and style.
 FROM git_layer AS neovim_config_base
 
-RUN apk add curl && \
+RUN apk add curl st font-hack-nerd && \
     git clone --depth 1 https://github.com/wbthomason/packer.nvim \
     ${XDG_DATA_HOME}/nvim/site/pack/packer/start/packer.nvim && \
     git clone --depth 1 --branch base-ide \
