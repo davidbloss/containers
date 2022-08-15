@@ -28,13 +28,11 @@ RUN make -j CMAKE_BUILD_TYPE=Release && make -j install
 # Base config. Contains neovim plugins for git, code navigation, and style.
 FROM git_layer AS neovim_config_base
 
-RUN apk add curl st && \
+RUN apk add curl && \
     git clone --depth 1 https://github.com/wbthomason/packer.nvim \
     ${XDG_DATA_HOME}/nvim/site/pack/packer/start/packer.nvim && \
     git clone --depth 1 --branch base-ide \
     https://github.com/davidbloss/neovim-ide.git ${XDG_CONFIG_HOME}/nvim && \
-    mkdir -p ${XDG_DATA_HOME}/fonts && cd ${XDG_DATA_HOME}/fonts && \
-    curl -fLo "Hack Regular Nerd Font Complete.ttf" https://github.com/ryanoasis/nerd-fonts/raw/master/patched-fonts/Hack/Regular/complete/Hack%20Regular%20Nerd%20Font%20Complete.ttf && \
     apk del curl
 
 # Final product - all build, config, etc. brought in from prior image
@@ -42,10 +40,11 @@ FROM neovim_config_base AS neovim_base
 
 WORKDIR /home
 
-RUN apk add g++ ripgrep
+RUN apk add font-hack-nerd g++ ripgrep st
 COPY --from=neovim_build /usr/local/bin/nvim /usr/local/bin/nvim
 COPY --from=neovim_build /usr/local/share/nvim/runtime /usr/local/share/nvim/runtime
 RUN nvim --headless -c 'autocmd User PackerComplete quitall' -c 'PackerSync'
 
-ENTRYPOINT ["nvim"]
+# Start neovim instide of st (simple terminal)
+ENTRYPOINT ["st", "-f", "font-hack-nerd", "--", "nvim"]
 
