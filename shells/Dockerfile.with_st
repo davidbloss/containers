@@ -1,0 +1,8 @@
+FROM neovim_base as neovim_with_st
+
+ARG ST_FONT=font-hack-nerd
+
+RUN apk add st ${ST_FONT}
+
+# Start neovim instide of st (simple terminal)
+ENTRYPOINT ["st", "-f", "${ST_FONT}", "--", "nvim"]
