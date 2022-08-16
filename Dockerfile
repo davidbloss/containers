@@ -40,11 +40,10 @@ FROM neovim_config_base AS neovim_base
 
 WORKDIR /home
 
-RUN apk add font-hack-nerd g++ ripgrep st
+RUN apk add g++ ripgrep
 COPY --from=neovim_build /usr/local/bin/nvim /usr/local/bin/nvim
 COPY --from=neovim_build /usr/local/share/nvim/runtime /usr/local/share/nvim/runtime
 RUN nvim --headless -c 'autocmd User PackerComplete quitall' -c 'PackerSync'
 
-# Start neovim instide of st (simple terminal)
-ENTRYPOINT ["st", "-f", "font-hack-nerd", "--", "nvim"]
+ENTRYPOINT ["nvim"]
 
