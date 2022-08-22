@@ -1,5 +1,5 @@
 # Add git once, reuse below.
-FROM alpine:3.15.5 as git_layer
+FROM alpine:latest as git_layer
 
 RUN apk add git
 ENV XDG_CONFIG_HOME="${XDG_CONFIG_HOME:-/home/.config}" \
