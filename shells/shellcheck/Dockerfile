@@ -1,4 +1,6 @@
-FROM alpine:latest as haskell_layer
+ARG PLATFORM
+
+FROM ${PLATFORM}alpine:latest as haskell_layer
 
 WORKDIR /home
 
