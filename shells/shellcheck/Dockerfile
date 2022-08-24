@@ -35,9 +35,9 @@ RUN curl --proto '=https' --tlsv1.2 -sSf \
 
 FROM alpine:latest as shellcheck_layer
 
-COPY --from=haskell_layer /home/shellcheck/ /usr/local/lib/
+COPY --from=haskell_layer /home/shellcheck/ /usr/local/lib/shellcheck/
 
 RUN apk update && apk add gmp && \
-    ln -s /usr/local/lib/Shellcheck-*/bin/shellcheck /usr/local/bin/
+    ln -s /usr/local/lib/shellcheck/Shellcheck-*/bin/shellcheck /usr/local/bin/
 
 ENTRYPOINT ["shellcheck"]
