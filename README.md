@@ -1,5 +1,7 @@
 # Neovim as a containerized IDE
 
+🚧 Alpha stage project 🚧
+
 For development in more tightly controlled work environments.
 
 System level work managed here. Neovim work pulled in from other repo.
