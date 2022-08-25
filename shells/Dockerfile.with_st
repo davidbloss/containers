@@ -1,4 +1,6 @@
-FROM neovim_base as neovim_with_st
+ARG NEOVIM_IMAGE=neovim_shell_ide
+
+FROM docker.io/davidbloss/${NEOVIM_IMAGE} as neovim_with_st
 
 ARG ST_FONT=font-hack-nerd
 
