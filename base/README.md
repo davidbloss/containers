@@ -6,7 +6,11 @@ git,
 [packer](https://github.com/wbthomason/packer.nvim "Neovim plugin manager"),
 and necessary OS packages.
 
-This image works as a starting point for building more feature rich images.
+This [image](https://hub.docker.com/r/davidbloss/neovim_vanilla) works as a
+starting point for building more feature rich images on these architectures:
+- **linux/386**
+- **linux/amd64**
+- **linux/arm64**
 
 ## Considerations
 
