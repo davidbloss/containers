@@ -25,7 +25,12 @@ RUN apk add --no-cache \
     make -j CMAKE_BUILD_TYPE=Release && \
     make -j install && \
     git clone --depth 1 https://github.com/wbthomason/packer.nvim \
-    ${XDG_DATA_HOME}/nvim/site/pack/packer/start/packer.nvim
+    ${XDG_DATA_HOME}/nvim/site/pack/packer/start/packer.nvim && \
+    mkdir -p ${XDG_CONFIG_HOME} && \
+    chgrp --recursive users /home/ ${XDG_CONFIG_HOME} ${XDG_DATA_HOME} && \
+    chmod --recursive g=u /home/ ${XDG_CONFIG_HOME} ${XDG_DATA_HOME}
+
+USER guest
 
 # Kick the tires on a (mostly) vanilla Neovim install
 ENTRYPOINT ["nvim"]
