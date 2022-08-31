@@ -30,7 +30,5 @@ RUN apk add --no-cache \
     chgrp --recursive users /home/ ${XDG_CONFIG_HOME} ${XDG_DATA_HOME} && \
     chmod --recursive g=u /home/ ${XDG_CONFIG_HOME} ${XDG_DATA_HOME}
 
-USER guest
-
 # Kick the tires on a (mostly) vanilla Neovim install
 ENTRYPOINT ["nvim"]
