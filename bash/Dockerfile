@@ -12,7 +12,7 @@ ARG SHELL_BRANCH=bash-ide
 
 # Clone configurations into
 RUN apk update && \
-    apk add bash g++ npm python3 py3-pip py3-setuptools ripgrep && \
+    apk add bash g++ mandoc npm python3 py3-pip py3-setuptools ripgrep && \
     pip install beautysh && \
     rm -rf ${XDG_CONFIG_HOME}/nvim/ && \
     git clone --depth 1 --branch ${SHELL_BRANCH} \
@@ -21,6 +21,7 @@ RUN apk update && \
          -c 'autocmd User PackerComplete quitall' \
          -c 'PackerSync' && \
     nvim --headless \
+         -c 'TSUpdateSync bash' \
          -c 'LspInstall --sync bashls' \
          -c q && \
     apk del npm py3-pip
