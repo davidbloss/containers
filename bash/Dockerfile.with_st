@@ -2,9 +2,9 @@ ARG NEOVIM_IMAGE=neovim_shell_ide
 
 FROM docker.io/davidbloss/${NEOVIM_IMAGE} as neovim_with_st
 
-ARG ST_FONT=font-hack-nerd
+ARG ST_FONT=hack-nerd
 
-RUN apk add st ${ST_FONT}
+RUN apk add st font-${ST_FONT}
 
 # Start neovim instide of st (simple terminal)
-ENTRYPOINT ["st", "-f", "${ST_FONT}", "--", "nvim"]
+ENTRYPOINT ["st", "-f", "font-${ST_FONT}", "--", "nvim"]

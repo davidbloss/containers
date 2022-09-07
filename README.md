@@ -19,11 +19,17 @@ Standalone container that more feature full containers may be built on.
   - Necessary?
 
 ### Bash IDE
-Features and programs to include:
-- [explainshell](https://github.com/idank/explainshell)
-- [shellcheck](https://github.com/koalaman/shellcheck)
+Container built on Base IDE with features helpful for bash script development.
+
+Features include:
+- [ShellCheck](https://github.com/koalaman/shellcheck) - static analyzer
+derived from maintainer's [Docker image](docker.io/koalaman/shellcheck:latest).
+- [Beautysh](https://github.com/lovesegfault/beautysh) - bash formatter
 - [bash-language-server](https://github.com/bash-lsp/bash-language-server)
 parser installed via nvim-treesitter
+
+Features to include?
+- [explainshell](https://github.com/idank/explainshell)
 
 ### Python IDE
 Features and programs to include:
