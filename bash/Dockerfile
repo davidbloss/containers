@@ -24,7 +24,7 @@ RUN apk update && \
          -c 'TSUpdateSync bash' \
          -c 'LspInstall --sync bashls' \
          -c q && \
-    apk del npm py3-pip
+    apk del g++ npm py3-pip
 
 COPY --from=shellcheck /bin/shellcheck /usr/local/bin/shellcheck
 
