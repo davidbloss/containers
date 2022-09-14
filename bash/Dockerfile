@@ -7,6 +7,8 @@ FROM docker.io/davidbloss/neovim_vanilla as neovim_shell_ide
 
 WORKDIR /home
 
+SHELL /bin/bash
+
 # Neovim configurations with bash support pulled in from this branch
 ARG SHELL_BRANCH=bash-ide
 
